@@ -10,7 +10,7 @@ interface CardWrapperProps {
     className?: string;
     headerLabel?: string;
     backButtonLabel?: string;
-    backButtonHref?: string;
+    backButtonHref: string;
     showSocial?: boolean;
 }
 export default function CardWrapper({

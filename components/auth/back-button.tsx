@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 
 interface BackButtonProps {
   label?: string;
-  href?: string;
+  href: string;
 }
 
 export default function BackButton({ href, label }: BackButtonProps) {
