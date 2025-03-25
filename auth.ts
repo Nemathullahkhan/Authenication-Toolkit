@@ -3,11 +3,9 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 
 import authConfig from "./auth.config";
 import { db } from "./lib/db";
-import { getUserById } from "./data/user"
+import { getUserById } from "./data/user";
 import { UserRole } from "@prisma/client";
-
-
-
+import { getTwoFactorConfirmationByUserId } from "./data/two-factor-confirmation";
 
 export const {
   handlers: { GET, POST },
@@ -15,25 +13,42 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
-  pages:{
+  pages: {
     signIn: "/auth/login",
-    error:"/auth/error",
+    error: "/auth/error",
   },
-  events:{
-    async linkAccount({user}){
+  events: {
+    async linkAccount({ user }) {
       await db.user.update({
-        where:{id:user.id},
-        data:{emailVerified: new Date()}
-      })
-    }
+        where: { id: user.id },
+        data: { emailVerified: new Date() },
+      });
+    },
   },
   callbacks: {
-    async signIn({user,account}){
-      if(account?.provider !== "credentials") return true;
+    async signIn({ user, account }) {
+      if (account?.provider !== "credentials") return true;
+
+      if (!user?.id) return false;
 
       const existingUser = await getUserById(user.id);
       // Prevenet sign0in without email verification
-      if(!existingUser?.emailVerified) return false;
+      if (!existingUser?.emailVerified) return false;
+
+      if (existingUser.isTwoFactorEnabled) {
+        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
+          existingUser.id
+        );
+
+        if (!twoFactorConfirmation) {
+          return false;
+        }
+
+        // Delete two factor confirmation for next sign-in
+        await db.twoFactorConfirmation.delete({
+          where: { id: twoFactorConfirmation.id },
+        });
+      }
 
       return true;
     },
@@ -42,7 +57,7 @@ export const {
         session.user.id = token.sub;
       }
 
-      if(token.role && session.user){
+      if (token.role && session.user) {
         session.user.role = token.role as UserRole;
       }
 
