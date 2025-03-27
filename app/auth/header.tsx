@@ -13,11 +13,11 @@ interface HeaderProps {
 
 export default function Header({label}:HeaderProps) {
   return (
-    <div className="w-full flex flex-col gap-y-4 items-center justify-center">
-        <h1 className={cn("text-3xl font-semibold",font.className)}>
+    <div className="w-full flex flex-col gap-y-2 items-center justify-center">
+        <h1 className={cn("text-4xl font-semibold text-slate-200",font.className)}>
             Auth
         </h1>
-        <p className="text-sm text-muted-foreground text-center">
+        <p className="text-md text-slate-200  text-muted-foreground text-center">
             {label}
         </p>
     </div>

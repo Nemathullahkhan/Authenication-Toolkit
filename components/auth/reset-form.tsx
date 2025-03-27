@@ -64,6 +64,7 @@ export default function ResetForm() {
                     <FormControl>
                       <Input
                         placeholder="Enter your email"
+                        className="border-slate-100/20 "
                         {...field}
                         disabled={isPending}
                       />

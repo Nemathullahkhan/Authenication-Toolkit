@@ -21,16 +21,17 @@ export default function CardWrapper({
     showSocial,
 }:CardWrapperProps) {
   return (
-    <Card className="w-[400px] shadow-md">
+    <Card className="w-[500px] bg-slate-950/30 text-slate-200 shadow-md border-2 border-blue-950">
         <CardHeader>
             <Header label={headerLabel}/>
         </CardHeader>
         <CardContent>
+        <Social/>
+
         {children}
         </CardContent>
         {showSocial && (
             <CardFooter>
-                <Social/>
             </CardFooter>
             )}
         <CardFooter className="flex justify-center">

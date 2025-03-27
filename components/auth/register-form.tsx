@@ -24,9 +24,8 @@ export default function RegisterForm() {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
-  
 
-// Zod schema for login form validation and useForm for form handling
+  // Zod schema for login form validation and useForm for form handling
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema), //what is zodResolver> ZodResolver is a function that takes a Zod schema and returns a resolver function that can be used with react-hook-form to validate the form data against the schema.
     defaultValues: {
@@ -35,7 +34,7 @@ export default function RegisterForm() {
       password: "",
     },
   });
-// what is z.infer? z.infer is a utility type provided by Zod that infers the TypeScript type from a Zod schema. It allows you to get the TypeScript type that corresponds to the schema you defined. Meaning, it will create a type that matches the shape of the data you expect to validate with that schema.
+  // what is z.infer? z.infer is a utility type provided by Zod that infers the TypeScript type from a Zod schema. It allows you to get the TypeScript type that corresponds to the schema you defined. Meaning, it will create a type that matches the shape of the data you expect to validate with that schema.
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError("");
     setSuccess("");
@@ -62,13 +61,14 @@ export default function RegisterForm() {
             <div className="space-y-4">
               <FormField
                 control={form.control}
-                name="email"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Username</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter your email"
+                        placeholder="John Doe"
+                        className="border-slate-100/20 "
                         {...field}
                         disabled={isPending}
                       />
@@ -79,13 +79,14 @@ export default function RegisterForm() {
               />
               <FormField
                 control={form.control}
-                name="name"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="John Doe"
+                        placeholder="Enter your email"
+                        className="border-slate-100/20 "
                         {...field}
                         disabled={isPending}
                       />
@@ -94,6 +95,7 @@ export default function RegisterForm() {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="password"
@@ -102,7 +104,9 @@ export default function RegisterForm() {
                     <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input
+                        type="password"
                         placeholder="******"
+                        className="border-slate-100/20 "
                         {...field}
                         disabled={isPending}
                       />
@@ -114,8 +118,8 @@ export default function RegisterForm() {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button type="submit" className="w-full" disabled={isPending}>
-              Create an account
+            <Button type="submit" className="w-full bg-slate-300 hover:bg-white text-blue-950 text-lg h-7 w-full" disabled={isPending}>
+              Register
             </Button>
           </form>
         </Form>

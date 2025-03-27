@@ -82,10 +82,11 @@ export default function LoginForm() {
                   name="code"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Two-Factor Code</FormLabel>
+                      <FormLabel className="text-md">Two-Factor Code</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="123456"
+                          className="border-zinc-400"
                           {...field}
                           disabled={isPending}
                         />
@@ -102,10 +103,11 @@ export default function LoginForm() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel >Email</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Enter your email"
+                            className="border-slate-100/20 "
                             {...field}
                             type="email"
                             disabled={isPending}
@@ -123,7 +125,9 @@ export default function LoginForm() {
                         <FormLabel>Password</FormLabel>
                         <FormControl>
                           <Input
+                            type="password"
                             placeholder="******"
+                            className="border-slate-100/20 "
                             {...field}
                             disabled={isPending}
                           />
@@ -132,9 +136,14 @@ export default function LoginForm() {
                           variant={"link"}
                           size="sm"
                           asChild
-                          className="px-0 font-normal justify-start text-blue-700"
+                          className=" font-normal justify-start "
                         >
-                          <Link href="/auth/reset">Forget Password??</Link>
+                          <Link
+                            href="/auth/reset"
+                            className="text-md text-slate-500 font-semibold"
+                          >
+                            Forget Password?
+                          </Link>
                         </Button>
                         <FormMessage />
                       </FormItem>
@@ -145,9 +154,15 @@ export default function LoginForm() {
             </div>
             <FormError message={error || urlError} />
             <FormSuccess message={success} />
-            <Button type="submit" className="w-full" disabled={isPending}>
-              {showTwoFactor ? "Confirm" :"Login"}
-            </Button>
+            <div className="w-full flex justify-center">
+              <Button
+                type="submit"
+                className="w-full bg-slate-300 text-blue-950 hover:bg-white text-lg h-7 w-full"
+                disabled={isPending}
+              >
+                {showTwoFactor ? "Confirm" : "Login"}
+              </Button>
+            </div>
           </form>
         </Form>
       </CardWrapper>

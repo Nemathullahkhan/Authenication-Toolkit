@@ -15,22 +15,21 @@ export default function Social() {
 
   }
   return (
-    <div className="flex items-center w-full gap-x-2">
+    <div className="flex items-center w-full gap-x-2 mb-6">
       <Button
         size={"lg"}
         variant={"outline"}
-        className="w-1/2"
+        className="w-1/2 bg-black/10 border-zinc-800"
         onClick={() =>onClick("google")}
       >
-        <FcGoogle className="w-4 h-5"/>
+        <FcGoogle className="w-12 h-12"/>
       </Button>
       <Button
-        size={"lg"}
         variant={"outline"}
-        className="w-1/2"
+        className="w-1/2 bg-black/10 border-zinc-800 group"
         onClick={() =>onClick("github")}
       >
-        <FaGithub className="w-4 h-5"/>
+        <FaGithub className="w-12 h-12 text-white group-hover:text-black"/>
       </Button>
     </div>
   );
