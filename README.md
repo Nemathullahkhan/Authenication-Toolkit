@@ -1,3 +1,65 @@
+# SecureAuth - Complete Authentication System
+
+A comprehensive authentication system built with Next.js, featuring advanced security measures and user management capabilities using the next-auth library. This system is designed to provide a secure and prevent csrf attacks.
+
+## Purpose: The aim of this project is to develop a robust authentication system using Next.js and next-auth library. The system will provide a secure and prevent csrf attacks. It is developed as a guide for developers to understand how to implement authentication in their Next.js applications.
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Learn More](#learn-more)
+- [Deploy on Vercel](#deploy-on-vercel)
+
+## Introduction
+This project is a Next.js application that provides a robust authentication system using the next-auth library and Next.js. It offers a range of features for user authentication, including email/password authentication, OAuth integration, and two-factor authentication.
+There are only 3 ways to implement the authentication system in Next.js:
+1. Credenitals Provider with JWT and CSRF Protection
+2. OAuth Providers
+3. Using SSO Providers
+In this project, I have implemented the first two methods. The third method is not implemented in this project.
+## Technologies Used
+- Next.js - A React framework for building server-side rendered and statically generated applications.
+- next-auth - A flexible authentication library for Next.js applications.
+- Prisma ORM - An ORM (Object-Relational Mapping) for Node.js and TypeScript. It simplifies database interactions.
+- PostgreSQL - A powerful open-source relational database system.
+- Shadcn UI - A UI library for Next.js applications.
+- Tailwind CSS - A utility-first CSS framework for rapidly building custom designs.
+- Typescript - A typed superset of JavaScript that compiles to plain JavaScript.
+- Vercel (Deployment) - A cloud platform for deploying and hosting applications.
+
+## Prerequisites
+Before you begin, ensure you have met the following requirements:
+- Node.js and npm installed on your machine.
+- A PostgreSQL database set up and running.
+- A GitHub account (optional for OAuth integration).
+- A Google account (optional for OAuth integration).
+- A Vercel account (optional for deployment).
+ 
+
+## Features
+
+- 🔐 Authentication Methods
+  - Email/Password Authentication
+  - OAuth Integration (Google, GitHub)
+  - Two-Factor Authentication (2FA)
+
+- 👤 User Management
+  - User Registration with Email Verification
+  - Password Reset Functionality
+  - User Profile Management
+  - Role-Based Access Control (Admin/User)
+
+- 🛡️ Security Features
+  - JWT Session Management
+  - Secure Password Hashing
+  - Rate Limiting
+  - Protected Routes
+  - API Route Protection
+
+## Project Structure
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
