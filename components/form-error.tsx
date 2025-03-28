@@ -6,6 +6,7 @@ interface FormErrorProps {
 
 export default function FormError({ message }: FormErrorProps) {
   if (!message) return null;
+  console.log(message);
   return (
     <div className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive">
       <BsExclamationTriangle className="text-destructive" size={20} />

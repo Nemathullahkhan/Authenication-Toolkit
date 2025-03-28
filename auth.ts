@@ -54,30 +54,30 @@ export const {
       return true;
     },
     async session({ token, session }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
-      }
+      try {
+        if (!session.user) {
+          return session;
+        }
 
-      if (token.role && session.user) {
-        session.user.role = token.role as UserRole;
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            id: token.sub,
+            name: token.name || session.user.name,
+            email: token.email || "null",
+            role: token.role as UserRole,
+            isTwoFactorEnabled: token.isTwoFactorEnabled as boolean,
+            isOAuth: token.isOAuth as boolean,
+          }
+        };
+      } catch (error) {
+        console.error("Session callback error:", error);
+        return session;
       }
-
-      
-      if (session.user) {
-        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean
-      }
-
-      if(session.user){
-        session.user.name = token.name;
-        session.user.email = token.email ?? "null";
-        session.user.isOAuth = token.isOAuth as boolean;
-
-      }
-      return session;
     },
     async jwt({ token }) {
       if (!token.sub) return token;
-
       const existingUser = await getUserById(token.sub);
 
       if (!existingUser) return token;

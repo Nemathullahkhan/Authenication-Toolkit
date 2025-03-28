@@ -14,21 +14,27 @@ export default auth((req)=>{
  const isAuthRoute = authRoutes.includes(nextUrl.pathname); // protecting the application by using these routes if the user is loggedin then redirect them back to application page if the user is loggedOut then redirect them back to login page
 
  if(isApiAuthRoute){
-    return null;
+    return undefined;
  }
 
  if(isAuthRoute){
     if(isLoggedin){
         return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT,nextUrl));
     };
-    return null;
+    return undefined;
  }
 
  if(!isLoggedin && !isPublicRoute){
-    return Response.redirect(new URL("/auth/login",nextUrl));
+   let callbackUrl = nextUrl.pathname;
+   if(nextUrl.search){
+      callbackUrl = nextUrl.search;
+   }       
+   const encodedCallbackUrl = encodeURIComponent(callbackUrl);
+   return Response.redirect(new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`,nextUrl));
+
  }
 
- return null;
+ return undefined;
 })
 
 export const config = {
